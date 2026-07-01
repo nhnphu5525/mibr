@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đế Chế Vô Hình – Độc Quyền Big Tech & Việt Nam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ── TOKENS ─────────────────────────────── */
+  :root{
+    --ink:#0b0c0e;
+    --paper:#f7f5f0;
+    --paper2:#eceae4;
+    --red:#c0392b;
+    --red-pale:#fdf0ee;
+    --blue:#1a3a5c;
+    --blue-mid:#2e74b5;
+    --blue-pale:#eaf3fb;
+    --gold:#c9821a;
+    --gold-pale:#fdf6e3;
+    --green:#1e6b3e;
+    --green-pale:#e8f5ee;
+    --accent:#e63946;   /* hot red – signature pulse */
+    --mono:'JetBrains Mono','Fira Code','Courier New',Courier,monospace;
+    --sans:'Inter',-apple-system,'Segoe UI',system-ui,sans-serif;
+    --serif:'Lora','Noto Serif',Georgia,serif;
+  }
+
+  /* ── RESET & BASE ──────────────────────── */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.75;overflow-x:hidden;font-weight:400;letter-spacing:-0.01em;font-feature-settings:'cv01','cv02','ss01'}
+  img{max-width:100%}
+  a{color:var(--blue-mid);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* ── TYPOGRAPHY ────────────────────────── */
+  h1{font-family:var(--serif);font-size:clamp(2.2rem,5vw,3.8rem);line-height:1.12;letter-spacing:-.025em;font-weight:700}
+  h2{font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.15rem);line-height:1.28;color:var(--blue);font-weight:600}
+  h3{font-size:1.1rem;font-weight:700;color:var(--blue);letter-spacing:-0.01em}
+  .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:.6rem;font-weight:500}
+  .lead{font-size:1.15rem;line-height:1.8;color:#333;font-weight:400}
+
+  /* ── LAYOUT ────────────────────────────── */
+  .wrap{max-width:1100px;margin:0 auto;padding:0 2rem}
+  section{padding:4.5rem 0}
+  section:nth-child(even){background:var(--paper2)}
+
+  /* ── HERO ──────────────────────────────── */
+  #hero{
+    min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+    background:var(--blue);color:#fff;position:relative;overflow:hidden;
+    padding:5rem 1.5rem 3rem;
+  }
+  #hero::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse 80% 60% at 70% 50%,#1e3f6e 0%,#0b1a2b 100%);
+  }
+  .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;max-width:1100px;margin:0 auto;width:100%}
+  .hero-tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);display:inline-block;padding:.3rem .7rem;margin-bottom:1.2rem;border-radius:3px;font-weight:500}
+  #hero h1{color:#fff;margin-bottom:1.1rem}
+  .hero-sub{color:#b0c4d8;font-size:1.08rem;line-height:1.75;margin-bottom:2rem;font-weight:300}
+  .scroll-hint{display:flex;align-items:center;gap:.5rem;color:#7a9abf;font-size:.78rem;font-family:var(--mono);font-weight:500}
+  .scroll-arrow{width:24px;height:24px;border-bottom:2px solid #7a9abf;border-right:2px solid #7a9abf;transform:rotate(45deg);animation:bounce 1.4s infinite}
+  @keyframes bounce{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(5px)}}
+
+  /* Pulse radar */
+  .radar{position:relative;width:320px;height:320px;margin:0 auto}
+  .radar-ring{position:absolute;border-radius:50%;border:1px solid rgba(46,116,181,.25);animation:pulse-ring 3s ease-out infinite}
+  .radar-ring:nth-child(1){inset:0;animation-delay:0s}
+  .radar-ring:nth-child(2){inset:10%;animation-delay:.6s}
+  .radar-ring:nth-child(3){inset:22%;animation-delay:1.2s}
+  .radar-ring:nth-child(4){inset:36%;animation-delay:1.8s}
+  .radar-core{position:absolute;inset:42%;border-radius:50%;background:var(--accent);box-shadow:0 0 40px var(--accent)}
+  @keyframes pulse-ring{0%{opacity:.6;transform:scale(1)}100%{opacity:0;transform:scale(1.15)}}
+  .radar-dot{position:absolute;width:10px;height:10px;border-radius:50%;transform:translate(-50%,-50%)}
+  .radar-dot span{position:absolute;left:14px;top:-4px;font-size:.65rem;white-space:nowrap;font-family:var(--mono);color:#b0c4d8}
+
+  /* ── NAV ───────────────────────────────── */
+  #sticky-nav{
+    position:fixed;top:0;left:0;right:0;width:100%;z-index:100;background:rgba(26,58,92,.97);
+    backdrop-filter:blur(8px);
+  }
+  .nav-inner{display:flex;gap:0;overflow-x:auto;max-width:1100px;margin:0 auto;scrollbar-width:none;-ms-overflow-style:none;justify-content:center}
+  .nav-inner::-webkit-scrollbar{display:none}
+  .nav-inner a{
+    color:#b0c4d8;font-size:.72rem;font-family:var(--mono);letter-spacing:.04em;
+    padding:.75rem .65rem;white-space:nowrap;text-decoration:none;
+    border-bottom:2px solid transparent;transition:all .2s;font-weight:500;
+  }
+  .nav-inner a:hover,.nav-inner a.active{color:#fff;border-bottom-color:var(--accent)}
+
+  /* ── SECTION HEADERS ───────────────────── */
+  .sec-header{display:flex;align-items:flex-start;gap:1.5rem;margin-bottom:2.5rem}
+  .sec-num{font-family:var(--mono);font-size:3.5rem;font-weight:800;color:rgba(26,58,92,.15);line-height:1;user-select:none;flex-shrink:0;letter-spacing:-.02em}
+  .sec-header.dark .sec-num{color:rgba(255,255,255,.18)}
+
+  /* ── THEORY CARDS (Lenin 5 features) ──── */
+  .theory-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:2rem}
+  .t-card{background:#fff;border:1px solid #dde4ee;border-radius:4px;padding:1.2rem;position:relative;overflow:hidden;transition:box-shadow .2s,transform .2s}
+  .t-card:hover{box-shadow:0 6px 24px rgba(26,58,92,.12);transform:translateY(-3px)}
+  .t-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--blue-mid)}
+  .t-card-num{font-family:var(--mono);font-size:1.8rem;font-weight:800;color:var(--paper2);line-height:1}
+  .t-card h3{margin:.25rem 0 .5rem;font-size:.95rem;letter-spacing:-0.01em}
+  .t-card p{font-size:.85rem;color:#555;line-height:1.6}
+  .t-card.highlight::before{background:var(--accent)}
+  .t-card.highlight .t-card-num{color:rgba(198,57,43,.1)}
+
+  /* ── STAT BARS ──────────────────────────── */
+  .stat-block{margin:1.5rem 0}
+  .stat-row{display:flex;align-items:center;gap:.75rem;margin-bottom:.8rem}
+  .stat-label{font-size:.85rem;width:140px;flex-shrink:0;font-weight:600;letter-spacing:-0.01em}
+  .stat-bar-wrap{flex:1;background:#e0e7ef;border-radius:3px;height:24px;overflow:hidden;position:relative}
+  .stat-bar{height:100%;border-radius:3px;position:relative;transition:width 1.2s cubic-bezier(.22,1,.36,1)}
+  .stat-bar::after{content:attr(data-val);position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:.73rem;font-weight:700;color:#fff;font-family:var(--mono)}
+  .bar-google{background:linear-gradient(90deg,#1a3a5c,#2e74b5)}
+  .bar-meta{background:linear-gradient(90deg,#1877f2,#42b0ff)}
+  .bar-tiktok{background:linear-gradient(90deg,#010101,#69c9d0)}
+  .bar-zalo{background:linear-gradient(90deg,#006af5,#00aaff)}
+  .bar-others{background:#b0bec5}
+  .stat-src{font-size:.72rem;color:#888;font-family:var(--mono);margin-top:.25rem}
+
+  /* ── COMPARISON TABLE ──────────────────── */
+  .comp-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:1.5rem 0}
+  .comp-table th{background:var(--blue);color:#fff;padding:.7rem 1rem;text-align:left;font-weight:600;font-size:.82rem}
+  .comp-table td{padding:.65rem 1rem;border-bottom:1px solid #dde4ee;vertical-align:top}
+  .comp-table tr:nth-child(even) td{background:var(--blue-pale)}
+  .comp-table .tag{display:inline-block;padding:.15rem .5rem;border-radius:2px;font-size:.7rem;font-weight:700;font-family:var(--mono)}
+  .tag-yes{background:var(--green-pale);color:var(--green)}
+  .tag-partial{background:var(--gold-pale);color:var(--gold)}
+  .tag-no{background:var(--red-pale);color:var(--red)}
+
+  /* ── TIMELINE ──────────────────────────── */
+  .timeline{position:relative;padding-left:2rem}
+  .timeline::before{content:'';position:absolute;left:.5rem;top:.5rem;bottom:.5rem;width:2px;background:linear-gradient(to bottom,var(--blue-mid),var(--accent))}
+  .tl-item{position:relative;margin-bottom:2rem}
+  .tl-dot{position:absolute;left:-1.75rem;top:.35rem;width:12px;height:12px;border-radius:50%;background:var(--blue-mid);border:2px solid var(--paper);box-shadow:0 0 0 2px var(--blue-mid)}
+  .tl-item:last-child .tl-dot{background:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+  .tl-year{font-family:var(--mono);font-size:.75rem;color:var(--accent);font-weight:700}
+  .tl-item h3{font-size:.95rem;margin:.25rem 0 .4rem}
+  .tl-item p{font-size:.85rem;color:#444;line-height:1.55}
+
+  /* ── DEBATE CARDS ──────────────────────── */
+  .debate-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem}
+  .debate-card{border-radius:4px;padding:1.5rem;border:1px solid}
+  .debate-pro{background:var(--green-pale);border-color:#a8d5b8}
+  .debate-con{background:var(--red-pale);border-color:#f0b8b2}
+  .debate-card h3{margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+  .debate-card ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+  .debate-card li{font-size:.9rem;line-height:1.5;padding-left:1.1rem;position:relative}
+  .debate-card li::before{position:absolute;left:0;top:0}
+  .debate-pro li::before{content:'✓';color:var(--green);font-weight:700}
+  .debate-con li::before{content:'✗';color:var(--red);font-weight:700}
+
+  /* ── QUIZ ──────────────────────────────── */
+  #quiz-section{background:var(--blue);color:#fff}
+  .quiz-box{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:2.2rem;max-width:720px;margin:0 auto}
+  .quiz-q{font-size:1.05rem;font-weight:600;margin-bottom:1.2rem;line-height:1.6}
+  .quiz-q span{font-family:var(--mono);color:var(--accent);font-size:.78rem;display:block;margin-bottom:.5rem;font-weight:600}
+  .quiz-opts{display:flex;flex-direction:column;gap:.6rem}
+  .quiz-opt{
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+    border-radius:4px;padding:.75rem 1rem;cursor:pointer;font-size:.9rem;
+    transition:all .2s;text-align:left;color:#fff;
+  }
+  .quiz-opt:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4)}
+  .quiz-opt.correct{background:rgba(30,107,62,.5);border-color:#4caf50}
+  .quiz-opt.wrong{background:rgba(192,57,43,.4);border-color:#e53935}
+  .quiz-feedback{margin-top:1rem;font-size:.9rem;min-height:1.5rem;line-height:1.55;color:#b0c4d8}
+  .quiz-nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem}
+  .quiz-nav button{background:var(--accent);color:#fff;border:none;padding:.6rem 1.4rem;border-radius:3px;cursor:pointer;font-size:.85rem;font-family:var(--mono);letter-spacing:.05em;transition:opacity .2s}
+  .quiz-nav button:hover{opacity:.85}
+  .quiz-nav button:disabled{opacity:.3;cursor:default}
+  .quiz-progress{font-family:var(--mono);font-size:.75rem;color:#7a9abf}
+  .quiz-score{font-family:var(--serif);font-size:2.5rem;color:var(--accent);text-align:center;margin-bottom:.5rem}
+  .quiz-result-msg{text-align:center;color:#b0c4d8;font-size:1rem}
+  .quiz-restart{margin-top:1rem;display:block;width:100%}
+
+  /* ── SOURCE BOX ────────────────────────── */
+  .source-box{background:#fff;border:1px solid #dde4ee;border-radius:4px;padding:1.2rem 1.5rem;margin-top:1.5rem}
+  .source-box h3{font-size:.85rem;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:.75rem}
+  .source-list{display:flex;flex-direction:column;gap:.4rem}
+  .source-list li{font-size:.78rem;color:#555;list-style:none;padding-left:1rem;position:relative;line-height:1.5}
+  .source-list li::before{content:'[';position:absolute;left:0;color:var(--accent)}
+
+  /* ── CALLOUT BOXES ─────────────────────── */
+  .callout{border-left:4px solid;padding:1.15rem 1.4rem;border-radius:0 6px 6px 0;margin:1.5rem 0;font-size:.92rem;line-height:1.65}
+  .callout-red{border-color:var(--accent);background:var(--red-pale)}
+  .callout-blue{border-color:var(--blue-mid);background:var(--blue-pale)}
+  .callout-gold{border-color:var(--gold);background:var(--gold-pale)}
+  .callout strong{display:block;margin-bottom:.3rem}
+
+  /* ── DATA CARDS ────────────────────────── */
+  .data-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin:1.5rem 0}
+  .data-card{background:#fff;border:1px solid #dde4ee;border-radius:4px;padding:1.2rem;text-align:center}
+  .data-card .big{font-family:var(--mono);font-size:2rem;font-weight:800;color:var(--blue);line-height:1;letter-spacing:-.02em}
+  .data-card .label{font-size:.75rem;color:#666;margin-top:.35rem;line-height:1.45}
+  .data-card .src{font-size:.65rem;color:#aaa;margin-top:.4rem;font-weight:500}
+
+  /* ── CONCLUSION ────────────────────────── */
+  #conclusion{background:var(--ink);color:#fff}
+  .concl-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+  .concl-thesis{font-family:var(--serif);font-size:1.4rem;line-height:1.6;color:#d0dcea;border-left:4px solid var(--accent);padding-left:1.5rem;margin:1.5rem 0}
+  .future-list{display:flex;flex-direction:column;gap:.8rem;margin-top:1rem}
+  .future-item{display:flex;gap:.75rem;align-items:flex-start}
+  .future-icon{font-size:1.2rem;flex-shrink:0;margin-top:.1rem}
+  .future-item p{font-size:.9rem;color:#b0c4d8;line-height:1.55}
+
+  /* ── FOOTER ────────────────────────────── */
+  footer{background:#000;color:#555;text-align:center;padding:2.5rem 1.5rem;font-size:.78rem;font-family:var(--mono);letter-spacing:.04em}
+  footer span{color:#888}
+
+  /* ── SCROLL REVEAL ──────────────────────── */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.visible{opacity:1;transform:none}
+
+  /* ── SKIP LINK & PROGRESS ──────────────── */
+  .skip-link{position:absolute;left:-999px;top:0;background:var(--accent);color:#fff;padding:.7rem 1.2rem;z-index:200;font-family:var(--mono);font-size:.85rem;border-radius:0 0 4px 0}
+  .skip-link:focus{left:0}
+  .progress-track{position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(255,255,255,.08);z-index:101}
+  .progress-fill{height:100%;width:0%;background:var(--accent);transition:width .1s linear}
+  a:focus-visible,button:focus-visible,.quiz-opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  /* ── UPDATE BADGE ──────────────────────── */
+  .update-badge{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:#8fd9c4;border:1px solid rgba(143,217,196,.4);background:rgba(30,107,62,.15);padding:.3rem .6rem;border-radius:2px;margin-bottom:1rem}
+  .update-badge::before{content:'●';color:#4caf50;animation:blink 2s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+  /* ── CAUSAL CHAIN ───────────────────────── */
+  .chain{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin:1.5rem 0}
+  .chain-step{background:#fff;border:1px solid #dde4ee;border-radius:4px;padding:1rem;position:relative}
+  .chain-step::after{content:'→';position:absolute;right:-1.35rem;top:50%;transform:translateY(-50%);color:var(--blue-mid);font-weight:900;font-size:1.1rem}
+  .chain-step:last-child::after{content:''}
+  .chain-label{font-family:var(--mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);display:block;margin-bottom:.4rem}
+  .chain-step p{font-size:.82rem;color:#444;line-height:1.5}
+  @media(max-width:800px){.chain{grid-template-columns:1fr}.chain-step::after{content:'↓';right:auto;left:50%;top:auto;bottom:-1.1rem;transform:translateX(-50%)}}
+
+  /* ── LEGAL RULING CARDS ─────────────────── */
+  .ruling-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1.5rem 0}
+  .ruling-card{border-radius:4px;padding:1.4rem;border:1px solid;position:relative}
+  .ruling-card.against{background:var(--red-pale);border-color:#f0b8b2}
+  .ruling-card.favor{background:var(--green-pale);border-color:#a8d5b8}
+  .ruling-verdict{font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700;padding:.2rem .5rem;border-radius:2px;display:inline-block;margin-bottom:.6rem}
+  .ruling-card.against .ruling-verdict{background:var(--red);color:#fff}
+  .ruling-card.favor .ruling-verdict{background:var(--green);color:#fff}
+  .ruling-card h3{font-size:1rem;margin-bottom:.5rem}
+  .ruling-card p{font-size:.87rem;color:#444;line-height:1.6;margin-bottom:.5rem}
+  .ruling-date{font-family:var(--mono);font-size:.7rem;color:#888}
+
+  /* ── GLOSSARY ───────────────────────────── */
+  .glossary{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1rem}
+  .gloss-item{background:#fff;border-left:3px solid var(--gold);padding:.8rem 1rem;border-radius:0 4px 4px 0}
+  .gloss-item dt{font-weight:700;font-size:.88rem;color:var(--blue);margin-bottom:.25rem}
+  .gloss-item dd{font-size:.82rem;color:#555;line-height:1.5}
+
+  /* ── LIMITS SECTION ─────────────────────── */
+  .limit-item{display:grid;grid-template-columns:28px 1fr;gap:.8rem;margin-bottom:1.3rem;align-items:start}
+  .limit-num{font-family:var(--mono);font-weight:900;color:var(--gold);font-size:1rem}
+  .limit-item h3{font-size:.95rem;margin-bottom:.3rem}
+  .limit-item p{font-size:.87rem;color:#444;line-height:1.6}
+
+  /* ── FRAMEWORK ANSWER GRID (WHY/WHAT/HOW..) ── */
+  .fw-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0}
+  .fw-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:1rem}
+  .fw-q{font-family:var(--mono);font-size:.7rem;color:var(--accent);letter-spacing:.1em;display:block;margin-bottom:.4rem}
+  .fw-item p{font-size:.85rem;color:#b0c4d8;line-height:1.55}
+
+  /* ── RESPONSIVE ────────────────────────── */
+  @media(max-width:700px){
+    .hero-grid{grid-template-columns:1fr}
+    .radar{display:none}
+    .debate-grid{grid-template-columns:1fr}
+    .concl-grid{grid-template-columns:1fr}
+    .theory-grid{grid-template-columns:1fr 1fr}
+    .stat-label{width:90px;font-size:.78rem}
+    .ruling-grid{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-grid">
+    <div>
+      <span class="hero-tag">KTCT Mác-Lênin · Chương 4 · Nhóm MIBR</span>
+      <div class="update-badge">Cập nhật phán quyết pháp lý &amp; số liệu tài chính · Tháng 07/2026</div>
+      <h1>Đế Chế<br>Vô Hình</h1>
+      <p class="hero-sub">
+        Độc quyền Big Tech trong thời đại số: từ lý luận Mác-Lênin đến thị trường Việt Nam và cuộc chiến của những super-app.
+      </p>
+      <div class="scroll-hint">
+        <div class="scroll-arrow"></div>
+        Cuộn để khám phá
+      </div>
+    </div>
+    <div>
+      <div class="radar" aria-hidden="true">
+        <div class="radar-ring"></div>
+        <div class="radar-ring"></div>
+        <div class="radar-ring"></div>
+        <div class="radar-ring"></div>
+        <div class="radar-core"></div>
+        <!-- dots: Google, Meta, Zalo, TikTok -->
+        <div class="radar-dot" style="left:28%;top:22%;background:#4285f4">
+          <span>Google</span>
+        </div>
+        <div class="radar-dot" style="left:68%;top:18%;background:#1877f2">
+          <span>Meta</span>
+        </div>
+        <div class="radar-dot" style="left:72%;top:62%;background:#006af5">
+          <span>Zalo</span>
+        </div>
+        <div class="radar-dot" style="left:22%;top:70%;background:#69c9d0">
+          <span>TikTok</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STICKY NAV -->
+<a class="skip-link" href="#theory">Bỏ qua, vào nội dung chính</a>
+<nav id="sticky-nav" aria-label="Điều hướng nhanh">
+  <div class="nav-inner">
+    <a href="#theory">01 Lý Luận</a>
+    <a href="#data">02 Số Liệu VN</a>
+    <a href="#bigtech">03 Big Tech Mỹ</a>
+    <a href="#legal-update">04 Pháp Lý 2024–26</a>
+    <a href="#superapp">05 Super-App</a>
+    <a href="#debate">06 Phản Biện</a>
+    <a href="#quiz-section">07 Trắc Nghiệm</a>
+    <a href="#conclusion">08 Kết Luận</a>
+    <a href="#sources">09 Nguồn</a>
+  </div>
+  <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
+</nav>
+<div style="height:42px"></div>
+
+<!-- ════════════════════════════════════════
+     1. LÝ LUẬN
+════════════════════════════════════════ -->
+<section id="theory">
+  <div class="wrap">
+    <div class="sec-header reveal">
+      <div class="sec-num">01</div>
+      <div>
+        <span class="eyebrow">01 · Lý luận KTCT Mác-Lênin</span>
+        <h2>Độc Quyền Tư Bản Chủ Nghĩa<br>Là Gì?</h2>
+      </div>
+    </div>
+
+    <p class="lead reveal">
+      Theo giáo trình <em>Kinh tế Chính trị Mác-Lênin</em> (2021), độc quyền ra đời từ sự <strong>tích tụ và tập trung sản xuất</strong> đến mức độ cao, khi một số ít tổ chức tư bản kiểm soát phần lớn sản xuất và phân phối của một ngành. Lênin chỉ ra 5 đặc điểm kinh tế cơ bản của chủ nghĩa tư bản độc quyền:
+    </p>
+
+    <div class="theory-grid reveal">
+      <div class="t-card">
+        <div class="t-card-num">01</div>
+        <h3>Tập trung sản xuất & Tổ chức độc quyền</h3>
+        <p>Tích tụ sản xuất cao → hình thành Cartel, Syndicate, Trust, Consortium. Số ít doanh nghiệp nắm toàn bộ thị trường.</p>
+      </div>
+      <div class="t-card">
+        <div class="t-card-num">02</div>
+        <h3>Tư bản tài chính & Đầu sỏ tài chính</h3>
+        <p>Tư bản công nghiệp kết hợp tư bản ngân hàng → hình thành tư bản tài chính, "đầu sỏ" kiểm soát nền kinh tế.</p>
+      </div>
+      <div class="t-card highlight">
+        <div class="t-card-num">03</div>
+        <h3>Xuất khẩu tư bản</h3>
+        <p>Thay vì xuất khẩu hàng hoá đơn thuần, tư bản độc quyền xuất khẩu cả tư bản để thu lợi nhuận siêu ngạch từ thị trường nước ngoài.</p>
+      </div>
+      <div class="t-card">
+        <div class="t-card-num">04</div>
+        <h3>Phân chia thế giới kinh tế</h3>
+        <p>Các tổ chức độc quyền quốc tế phân chia thị trường thế giới giữa các nhóm tư bản kếch xù.</p>
+      </div>
+      <div class="t-card">
+        <div class="t-card-num">05</div>
+        <h3>Phân chia thế giới lãnh thổ</h3>
+        <p>Các cường quốc tư bản phân chia khu vực ảnh hưởng trên thế giới để đảm bảo lợi ích cho tư bản độc quyền nước mình.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-red reveal" style="margin-top:2rem">
+      <strong>🔑 Khái niệm cốt lõi: Lợi nhuận siêu ngạch (Super Profit)</strong>
+      Lợi nhuận siêu ngạch = lợi nhuận cao hơn lợi nhuận bình quân xã hội mà tư bản độc quyền thu được nhờ độc chiếm thị trường, áp đặt giá cả độc quyền và bóc lột lao động tối đa. Đây là <strong>mục tiêu và động lực</strong> cốt lõi của toàn bộ chiến lược mở rộng của Big Tech.
+    </div>
+
+    <div class="callout callout-blue reveal">
+      <strong>📖 Biểu hiện mới của độc quyền trong thời đại số (Giáo trình KTCT 2021, tr.149–156)</strong>
+      Trong điều kiện ngày nay, độc quyền biểu hiện qua: (1) Độc quyền nền tảng kỹ thuật số, (2) Độc quyền dữ liệu người dùng, (3) Rào cản gia nhập thị trường phi vật chất (network effect, switching cost), (4) Xuất khẩu tư bản kỹ thuật số xuyên biên giới, (5) Tư bản tài chính kỹ thuật số qua M&A liên tục.
+    </div>
+
+    <div class="callout callout-gold reveal">
+      <strong>⚠️ Ghi chú phương pháp luận – tránh suy diễn quá mức</strong>
+      Nhóm MIBR minh định: khái niệm "giá trị thặng dư kỹ thuật số" hay "chiếm đoạt attention" trong bài này là <strong>phép loại suy khái niệm (analogy)</strong> áp dụng lý luận giá trị thặng dư cổ điển (dựa trên lao động làm thuê được trả công) vào bối cảnh mới nơi người dùng không phải là người lao động được thuê. Đây <em>không phải</em> là kết luận có thể suy ra trực tiếp và duy nhất từ văn bản gốc của Marx/Lenin, mà là một hướng vận dụng lý luận đang được tranh luận trong giới học thuật KTCT đương đại. Bài viết trình bày nó như một khung phân tích có sức giải thích cao, không phải một định lý đã được chứng minh.
+    </div>
+
+    <h3 class="reveal" style="margin:2rem 0 1rem">Bảng thuật ngữ đối chiếu: KTCT Mác–Lênin ↔ Kinh tế học nền tảng hiện đại</h3>
+    <dl class="glossary reveal">
+      <div class="gloss-item">
+        <dt>Lợi nhuận siêu ngạch</dt>
+        <dd>≈ "Economic rent" / "supernormal profit" trong Industrial Organization — lợi nhuận vượt mức cạnh tranh nhờ rào cản gia nhập (barriers to entry).</dd>
+      </div>
+      <div class="gloss-item">
+        <dt>Rào cản gia nhập phi vật chất</dt>
+        <dd>≈ "Network effect" + "switching cost" trong Platform Economics — giá trị nền tảng tăng theo số người dùng, khiến việc rời bỏ tốn kém.</dd>
+      </div>
+      <div class="gloss-item">
+        <dt>Tập trung sản xuất</dt>
+        <dd>≈ Market concentration, đo bằng chỉ số HHI (Herfindahl–Hirschman Index) hoặc CR4 trong kinh tế học tổ chức ngành.</dd>
+      </div>
+      <div class="gloss-item">
+        <dt>Xuất khẩu tư bản</dt>
+        <dd>≈ "Cross-border capital flow" / doanh thu số xuyên biên giới không tương ứng cơ sở thường trú chịu thuế (digital services tax gap).</dd>
+      </div>
+      <div class="gloss-item">
+        <dt>"Miễn phí" hoá hàng hoá số</dt>
+        <dd>≈ "Multi-sided market" (Rochet–Tirole): nền tảng trợ giá một bên thị trường (người dùng) để thu tiền bên kia (nhà quảng cáo).</dd>
+      </div>
+      <div class="gloss-item">
+        <dt>Đầu sỏ tài chính</dt>
+        <dd>≈ "Oligopoly" + cấu trúc sở hữu tập trung qua cổ phần biểu quyết đặc biệt (dual-class shares, vd. Meta Class B).</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     2. SỐ LIỆU VIỆT NAM
+════════════════════════════════════════ -->
+<section id="data" style="background:var(--paper2)">
+  <div class="wrap">
+    <div class="sec-header reveal">
+      <div class="sec-num">02</div>
+      <div>
+        <span class="eyebrow">02 · Thực tiễn Việt Nam · Số liệu chuẩn nguồn</span>
+        <h2>Bức Tranh Thị Trường Số<br>Việt Nam 2024</h2>
+      </div>
+    </div>
+
+    <!-- Key stats -->
+    <div class="data-cards reveal">
+      <div class="data-card">
+        <div class="big">78.4M</div>
+        <div class="label">Người dùng Internet<br>đầu năm 2024</div>
+        <div class="src">DataReportal · Jan 2024</div>
+      </div>
+      <div class="data-card">
+        <div class="big">79.1%</div>
+        <div class="label">Tỷ lệ thâm nhập<br>Internet dân số VN</div>
+        <div class="src">DataReportal · Jan 2024</div>
+      </div>
+      <div class="data-card">
+        <div class="big">72.7M</div>
+        <div class="label">Người dùng mạng xã hội<br>(73.3% dân số)</div>
+        <div class="src">DataReportal · Jan 2024</div>
+      </div>
+      <div class="data-card">
+        <div class="big">6.1h</div>
+        <div class="label">Thời gian online<br>trung bình/ngày</div>
+        <div class="src">We Are Social · 2024</div>
+      </div>
+      <div class="data-card">
+        <div class="big">$39B</div>
+        <div class="label">Quy mô kinh tế số<br>Việt Nam 2025</div>
+        <div class="src">Cập nhật 2025</div>
+      </div>
+      <div class="data-card">
+        <div class="big">78.3M</div>
+        <div class="label">Người dùng Zalo<br>(MAU giữa 2025)</div>
+        <div class="src">Giữa năm 2025</div>
+      </div>
+    </div>
+
+    <!-- Search engine bar -->
+    <h3 class="reveal" style="margin-top:2rem;margin-bottom:.5rem">Thị phần công cụ tìm kiếm tại Việt Nam (Tháng 6/2026)</h3>
+    <div class="stat-block reveal">
+      <div class="stat-row">
+        <div class="stat-label">Google</div>
+        <div class="stat-bar-wrap">
+          <div class="stat-bar bar-google" data-val="95.59%" style="width:0" data-width="95.59%"></div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">Cốc Cốc</div>
+        <div class="stat-bar-wrap">
+          <div class="stat-bar bar-others" data-val="3.62%" style="width:0" data-width="3.62%"></div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">Khác</div>
+        <div class="stat-bar-wrap">
+          <div class="stat-bar" style="background:#d0d8e4;width:0" data-val="0.79%" data-width="0.79%"></div>
+        </div>
+      </div>
+      <p class="stat-src">Nguồn: StatCounter GlobalStats cập nhật tháng 6/2026</p>
+    </div>
+
+    <!-- Messaging app bar -->
+    <h3 class="reveal" style="margin-top:1.5rem;margin-bottom:.5rem">Thị phần ứng dụng mạng xã hội & nhắn tin tại Việt Nam – Mức độ thâm nhập (2025)</h3>
+    <div class="stat-block reveal">
+      <div class="stat-row">
+        <div class="stat-label">Zalo</div>
+        <div class="stat-bar-wrap">
+          <div class="stat-bar bar-zalo" data-val="85%" style="width:0" data-width="85%"></div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">Facebook</div>
+        <div class="stat-bar-wrap">
+          <div class="stat-bar bar-meta" data-val="75.2%" style="width:0" data-width="75.2%"></div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">Messenger</div>
+        <div class="stat-bar-wrap">
+          <div class="stat-bar" style="background:#0084ff;width:0" data-val="51%" data-width="51%"></div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">TikTok</div>
+        <div class="stat-bar-wrap">
+          <div class="stat-bar bar-tiktok" data-val="18%" style="width:0" data-width="18%"></div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">Viber</div>
+        <div class="stat-bar-wrap">
+          <div class="stat-bar bar-others" data-val="7%" style="width:0" data-width="7%"></div>
+        </div>
+      </div>
+      <p class="stat-src">Nguồn: Decision Lab – "The Connected Consumer Q4 2024" · dẫn lại bởi Vietnam.vn (Apr 2025)</p>
+    </div>
+
+    <div class="callout callout-gold reveal">
+      <strong>🔍 Phân tích KTCT: Hiệu ứng mạng lưới (Network Effect) = Rào cản độc quyền mới</strong>
+      Theo lý luận Mác-Lênin, rào cản gia nhập thị trường là công cụ bảo vệ lợi nhuận siêu ngạch. Với Big Tech, rào cản này <em>không phải nhà máy hay tư bản vật chất</em>, mà là <strong>hiệu ứng mạng lưới</strong>: Zalo có giá trị vì hàng chục triệu người dùng VN khác đang dùng nó. Người dùng thứ N+1 không trả tiền thêm, nhưng làm tăng giá trị toàn nền tảng – đây là hình thức chiếm đoạt giá trị thặng dư tập thể đặc trưng của tư bản kỹ thuật số (xem ghi chú phương pháp luận ở mục 01).
+    </div>
+
+    <h3 class="reveal" style="margin-top:2rem;margin-bottom:.5rem">Đo lường tập trung thị trường bằng chỉ số HHI (Industrial Organization)</h3>
+    <p class="reveal" style="font-size:.9rem;color:#444;margin-bottom:1rem">Để tránh nhận định "độc quyền" chỉ dựa trên cảm tính, nhóm áp dụng <strong>Herfindahl–Hirschman Index (HHI)</strong> — tổng bình phương thị phần (%) từng doanh nghiệp. Ngưỡng của DOJ/FTC Hoa Kỳ: HHI &gt; 2,500 = thị trường tập trung cao (highly concentrated).</p>
+    <div class="data-cards reveal">
+      <div class="data-card">
+        <div class="big" style="color:var(--red)">~9,150</div>
+        <div class="label">HHI thị trường tìm kiếm VN<br>(95.59²+3.62²+0.79²)</div>
+        <div class="src">Tính toán nhóm từ số liệu mới</div>
+      </div>
+      <div class="data-card">
+        <div class="big" style="color:var(--gold)">~6,832</div>
+        <div class="label">HHI thị trường nhắn tin VN<br>(theo % thâm nhập, không chuẩn hoá thị phần)</div>
+        <div class="src">Tính toán nhóm từ Decision Lab</div>
+      </div>
+      <div class="data-card">
+        <div class="big">2,500</div>
+        <div class="label">Ngưỡng "tập trung cao"<br>theo Hướng dẫn sáp nhập DOJ/FTC 2023</div>
+        <div class="src">U.S. DOJ/FTC Merger Guidelines</div>
+      </div>
+    </div>
+    <p class="stat-src reveal" style="margin-top:-.5rem">⚠️ Lưu ý phương pháp: số liệu thâm nhập (penetration, người dùng có thể dùng nhiều app cùng lúc) không tương đương thị phần loại trừ lẫn nhau (market share) dùng để tính HHI chuẩn. HHI thị trường nhắn tin ở đây là ước lượng cận trên (upper-bound), mang tính minh hoạ mức độ tập trung, không phải số liệu điều tra cạnh tranh chính thức.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     3. BIG TECH MỸ
+════════════════════════════════════════ -->
+<section id="bigtech">
+  <div class="wrap">
+    <div class="sec-header reveal">
+      <div class="sec-num">03</div>
+      <div>
+        <span class="eyebrow">03 · Mô hình độc quyền · Big Tech Mỹ tại Việt Nam</span>
+        <h2>Google & Meta:<br>Đế Chế Quảng Cáo Số</h2>
+      </div>
+    </div>
+
+    <p class="lead reveal">
+      Google và Meta (Facebook/Instagram) thực hiện <strong>xuất khẩu tư bản kỹ thuật số</strong> vào Việt Nam theo mô hình "nền tảng miễn phí – bán dữ liệu người dùng cho quảng cáo". Người dùng VN không trả tiền nhưng lao động kỹ thuật số của họ (nội dung, tương tác, dữ liệu hành vi) tạo ra giá trị thặng dư được tư bản hoá tại Mỹ.
+    </p>
+
+    <!-- Mechanism table -->
+    <h3 class="reveal" style="margin:1.5rem 0 .5rem">Bảng so sánh: 5 Đặc điểm Độc quyền TBCN → Biểu hiện tại Big Tech</h3>
+    <table class="comp-table reveal">
+      <thead>
+        <tr>
+          <th>Đặc điểm (Lênin)</th>
+          <th>Biểu hiện tại Google (Alphabet)</th>
+          <th>Biểu hiện tại Meta Platforms</th>
+          <th>Mức độ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. Tập trung sản xuất & Tổ chức độc quyền</strong></td>
+          <td>95.59% thị phần tìm kiếm VN; kiểm soát Android, Chrome, YouTube, Google Maps</td>
+          <td>Facebook 75.2% dân số VN (76.2 triệu); sở hữu Instagram, WhatsApp, Messenger</td>
+          <td><span class="tag tag-yes">Rất cao</span></td>
+        </tr>
+        <tr>
+          <td><strong>2. Tư bản tài chính & Đầu sỏ</strong></td>
+          <td>Alphabet vốn hóa >$2,000 tỷ USD (2024); cổ đông tổ chức nắm &gt;70% cổ phần</td>
+          <td>Meta vốn hóa >$1,400 tỷ USD; Mark Zuckerberg kiểm soát siêu cổ phần Class B</td>
+          <td><span class="tag tag-yes">Rất cao</span></td>
+        </tr>
+        <tr>
+          <td><strong>3. Xuất khẩu tư bản</strong></td>
+          <td>Đặt văn phòng VN, thu quảng cáo từ doanh nghiệp VN, lợi nhuận chuyển về Mỹ</td>
+          <td>Server tại Singapore/HK, thu toàn bộ doanh thu quảng cáo VN qua thuế tối thiểu</td>
+          <td><span class="tag tag-yes">Cao</span></td>
+        </tr>
+        <tr>
+          <td><strong>4. Phân chia thế giới kinh tế</strong></td>
+          <td>Google: kiểm soát tìm kiếm, quảng cáo display, video (YouTube)</td>
+          <td>Meta: kiểm soát mạng xã hội, quảng cáo social, messaging (Messenger, WhatsApp)</td>
+          <td><span class="tag tag-yes">Cao</span></td>
+        </tr>
+        <tr>
+          <td><strong>5. Lợi nhuận siêu ngạch</strong></td>
+          <td>Biên lợi nhuận ròng Alphabet ~24% (2023) – cao hơn nhiều lần trung bình ngành</td>
+          <td>Biên lợi nhuận Meta ~29% (2023) – đỉnh cao nhờ chi phí biên = 0 với mỗi user mới</td>
+          <td><span class="tag tag-yes">Rất cao</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="stat-src" style="margin-top:.4rem">Nguồn: Alphabet Annual Report 2023; Meta Annual Report 2023; DataReportal Digital 2025 Vietnam; Knok Studios (Dec 2023)</p>
+
+    <!-- Timeline M&A -->
+    <h3 class="reveal" style="margin:2rem 0 1rem">Chiến lược M&A – "Mua để diệt cạnh tranh" (Tập trung tư bản qua thâu tóm)</h3>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2006</div>
+        <h3>Google mua YouTube ($1.65 tỷ)</h3>
+        <p>Loại bỏ đối thủ cạnh tranh video lớn nhất, tạo độc quyền trên thị trường video trực tuyến. Ngày nay YouTube chiếm >70% thị trường video VN.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2012</div>
+        <h3>Facebook mua Instagram ($1 tỷ)</h3>
+        <p>Ngăn chặn đối thủ tiềm năng. Instagram nay là nền tảng ảnh/video hàng đầu, tăng lực kiểm soát quảng cáo của Meta.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2014</div>
+        <h3>Facebook mua WhatsApp ($19 tỷ)</h3>
+        <p>Thâu tóm nền tảng messaging toàn cầu 2 tỷ người dùng. Kết hợp với Messenger tạo "tường lửa" messaging không thể cạnh tranh.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2016</div>
+        <h3>Google mua DeepMind / AI assets</h3>
+        <p>Tích lũy tư bản trí tuệ nhân tạo – tư liệu sản xuất mới của kỷ nguyên số. Kiểm soát AI = kiểm soát tương lai nền tảng.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2023–24</div>
+        <h3>Cả hai chạy đua AI (Gemini vs Llama)</h3>
+        <p>Vòng độc quyền mới: AI tạo sinh trở thành "rào cản kỹ thuật số" thế hệ tiếp theo. Chi phí đầu tư >$100 tỷ/năm – chỉ có oligopoly mới đủ sức.</p>
+      </div>
+    </div>
+
+    <div class="callout callout-red reveal">
+      <strong>⚠️ Mâu thuẫn cốt lõi (Thesis nhóm MIBR):</strong>
+      Big Tech không chỉ độc quyền thị trường – họ độc quyền <em>dữ liệu</em>, tức là độc quyền <strong>tư liệu sản xuất</strong> của nền kinh tế số. Khi dữ liệu người dùng VN được thu thập, xử lý và tư bản hoá bởi Alphabet tại Mỹ, đây là một hình thức <strong>xuất khẩu giá trị thặng dư kỹ thuật số</strong> – biểu hiện mới của đặc điểm thứ 3 trong lý luận Lênin.
+    </div>
+
+    <h3 class="reveal" style="margin:2rem 0 1rem">Chuỗi lập luận nhân quả (Causal Chain) cho luận điểm cốt lõi</h3>
+    <div class="chain reveal">
+      <div class="chain-step">
+        <span class="chain-label">Evidence</span>
+        <p>Google giữ 95.59% thị phần tìm kiếm VN; tháng 8/2024 tòa án liên bang Mỹ (Judge Mehta) xác nhận Google là "monopolist" trong tìm kiếm &amp; quảng cáo văn bản.</p>
+      </div>
+      <div class="chain-step">
+        <span class="chain-label">Mechanism</span>
+        <p>Vị thế thống trị → hợp đồng độc quyền phân phối (default trên Android, Chrome, thỏa thuận $20 tỷ/năm với Apple) → dựng rào cản gia nhập phi vật chất cho đối thủ.</p>
+      </div>
+      <div class="chain-step">
+        <span class="chain-label">Reasoning</span>
+        <p>Rào cản gia nhập cao + chi phí biên gần 0/user mới → biên lợi nhuận ròng ~24–29%, cao hơn nhiều mức bình quân ngành công nghệ (~10–15%).</p>
+      </div>
+      <div class="chain-step">
+        <span class="chain-label">Conclusion</span>
+        <p>Chênh lệch lợi nhuận đó, theo khung Lênin, là <strong>lợi nhuận siêu ngạch</strong> – hệ quả trực tiếp của độc chiếm thị trường, không chỉ của "sản phẩm tốt hơn".</p>
+      </div>
+    </div>
+    <p class="stat-src reveal">Nguồn: U.S. District Court for D.C., <em>United States v. Google LLC</em>, phán quyết 05/08/2024; Alphabet Annual Report 2023.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     4. DIỄN BIẾN PHÁP LÝ 2024–2026
+════════════════════════════════════════ -->
+<section id="legal-update">
+  <div class="wrap">
+    <div class="sec-header reveal">
+      <div class="sec-num">04</div>
+      <div>
+        <span class="eyebrow">04 · Bằng chứng thực chứng mới nhất · Đối trọng hai chiều</span>
+        <h2>Toà Án Mỹ Phán Quyết:<br>Ai Thắng, Ai Thua?</h2>
+      </div>
+    </div>
+
+    <p class="lead reveal">
+      Từ 2024–2026, ba vụ kiện chống độc quyền lớn nhất nhắm vào Big Tech đã có phán quyết. Kết quả <strong>không đồng nhất</strong> — đây là bằng chứng thực chứng quan trọng nhất để kiểm định luận điểm của nhóm, theo cả hai chiều ủng hộ và phản bác.
+    </p>
+
+    <div class="ruling-grid reveal">
+      <div class="ruling-card against">
+        <span class="ruling-verdict">Xác nhận độc quyền</span>
+        <h3>🔍 Google – Tìm kiếm (US v. Google, DC)</h3>
+        <p>05/08/2024: Thẩm phán Amit Mehta tuyên <strong>Google là "monopolist"</strong> trong thị trường tìm kiếm chung và quảng cáo văn bản, vi phạm Điều 2 Đạo luật Sherman, do các hợp đồng phân phối độc quyền (vd. trả Apple ~$20 tỷ/năm để làm mặc định).</p>
+        <p>09/2025: Toà từ chối buộc bán Chrome/Android, nhưng cấm hợp đồng độc quyền phân phối và buộc chia sẻ dữ liệu tìm kiếm với đối thủ đủ điều kiện.</p>
+        <span class="ruling-date">DOJ/DC District Court · Aug 2024 &amp; Sep 2025</span>
+      </div>
+      <div class="ruling-card against">
+        <span class="ruling-verdict">Xác nhận độc quyền</span>
+        <h3>📢 Google – Ad Tech (Virginia)</h3>
+        <p>17/04/2025: Thẩm phán Brinkema kết luận Google <strong>độc quyền bất hợp pháp</strong> trong thị trường máy chủ quảng cáo cho publisher (ad server) và sàn giao dịch quảng cáo (ad exchange) — "gây thiệt hại đáng kể" cho publisher và người dùng internet mở.</p>
+        <p>Đây là vụ thứ 2 Google bị tuyên độc quyền trong vòng 9 tháng — củng cố mạnh mẽ luận điểm "tập trung tổ chức độc quyền" của nhóm.</p>
+        <span class="ruling-date">E.D. Virginia · Apr 2025</span>
+      </div>
+      <div class="ruling-card favor">
+        <span class="ruling-verdict">Bác bỏ cáo buộc</span>
+        <h3>📱 Meta – Instagram/WhatsApp (FTC)</h3>
+        <p>18/11/2025: Thẩm phán Boasberg <strong>bác đơn kiện của FTC</strong>, kết luận Meta <em>hiện không</em> nắm quyền lực độc quyền trong "mạng xã hội cá nhân" vì cạnh tranh thực chất từ TikTok và YouTube đã định hình lại thị trường — dù thừa nhận Meta có thể từng độc quyền lúc mua lại Instagram (2012)/WhatsApp (2014).</p>
+        <p>Toà không buộc Meta thoái vốn Instagram/WhatsApp.</p>
+        <span class="ruling-date">D.D.C. · Nov 2025</span>
+      </div>
+      <div class="ruling-card against">
+        <span class="ruling-verdict">Xử phạt hành chính</span>
+        <h3>🇻🇳 VNG/Zalo – Ủy ban Cạnh tranh Quốc gia</h3>
+        <p>Ủy ban Cạnh tranh Quốc gia (Bộ Công Thương) <strong>xử phạt VNG 810 triệu VNĐ</strong> vì vi phạm liên quan thu thập dữ liệu người dùng Zalo, đồng thời yêu cầu VNG báo cáo thông tin thị trường phục vụ đánh giá tập trung kinh tế — VNG đã xin lùi hạn nộp cuối 2025 vì "chưa hoàn tất tài liệu".</p>
+        <p>Đây là bằng chứng trực tiếp đầu tiên cho thấy <strong>cơ quan quản lý VN đã bắt đầu để mắt đến Zalo</strong> như một chủ thể có khả năng tập trung kinh tế/thị trường.</p>
+        <span class="ruling-date">Ủy ban Cạnh tranh Quốc gia · 2025–2026</span>
+      </div>
+    </div>
+
+    <div class="callout callout-gold reveal">
+      <strong>🎯 Đọc phán quyết theo phương pháp KTCT: xác nhận có chọn lọc, không phải xác nhận toàn bộ</strong>
+      Kết quả trái chiều (Google thua 2 lần, Meta thắng 1 lần) buộc nhóm phải <strong>tinh chỉnh</strong> luận điểm ban đầu: độc quyền kiểu Lênin mô tả rõ nhất ở thị trường có <em>một sản phẩm thay thế trực tiếp hạn chế</em> (tìm kiếm, ad tech) — nơi Google gần như không có đối thủ tương đương. Ngược lại, ở thị trường có <em>nhiều sản phẩm thay thế co giãn cao</em> (mạng xã hội, nơi TikTok/YouTube/Instagram cạnh tranh trực tiếp cho "thời gian chú ý"), ranh giới thị trường mờ hơn và toà án Mỹ không chấp nhận khung "độc quyền tuyệt đối". Đây chính xác là điểm mà lý luận <em>oligopoly</em> (độc quyền nhóm) — chứ không phải độc quyền đơn — mô tả sát thực tế hơn, và nhóm đã điều chỉnh lại ở mục 06 (Phản biện).
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     5. SUPER-APP VN
+════════════════════════════════════════ -->
+<section id="superapp" style="background:var(--paper2)">
+  <div class="wrap">
+    <div class="sec-header reveal">
+      <div class="sec-num">05</div>
+      <div>
+        <span class="eyebrow">05 · So sánh · Câu hỏi tranh luận</span>
+        <h2>Super-App Việt Nam:<br>Tự Vệ Hay Độc Quyền Mới?</h2>
+      </div>
+    </div>
+
+    <p class="lead reveal">
+      Zalo (VNG) với 78.3 triệu MAU giữa năm 2025 và mức độ thâm nhập 85% – đây là <strong>siêu ứng dụng</strong> (super-app) "Made in Vietnam" duy nhất đánh bại toàn bộ đối thủ ngoại: Viber, Line, Kakao Talk, WeChat đều đã rút lui khỏi thị trường VN. Nhưng thắng lợi đó có cái giá của nó.
+    </p>
+
+    <!-- Zalo profile -->
+    <div class="data-cards reveal">
+      <div class="data-card">
+        <div class="big">78.3M</div>
+        <div class="label">MAU giữa năm 2025</div>
+        <div class="src">Cập nhật 2025</div>
+      </div>
+      <div class="data-card">
+        <div class="big">2 tỷ</div>
+        <div class="label">Tin nhắn gửi/ngày</div>
+        <div class="src">Cập nhật 2025</div>
+      </div>
+      <div class="data-card">
+        <div class="big">85%</div>
+        <div class="label">Mức thâm nhập<br>đầu năm 2025</div>
+        <div class="src">Cập nhật 2025</div>
+      </div>
+      <div class="data-card">
+        <div class="big">17,000</div>
+        <div class="label">Cơ quan nhà nước<br>có Zalo OA</div>
+        <div class="src">Cập nhật 2025</div>
+      </div>
+      <div class="data-card">
+        <div class="big">3,465</div>
+        <div class="label">Mini Apps trên<br>nền tảng Zalo</div>
+        <div class="src">Vietnamnet · 2025</div>
+      </div>
+      <div class="data-card">
+        <div class="big">13M</div>
+        <div class="label">MAU dùng<br>Mini Apps</div>
+        <div class="src">Vietnam.vn · 2025</div>
+      </div>
+    </div>
+
+    <h3 class="reveal" style="margin:2rem 0 .5rem">So sánh mô hình: Big Tech Mỹ vs Super-App VN theo Lý luận KTCT</h3>
+    <table class="comp-table reveal">
+      <thead>
+        <tr>
+          <th>Tiêu chí</th>
+          <th>Big Tech Mỹ (Google/Meta)</th>
+          <th>Zalo – VNG (VN)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Hình thức độc quyền</strong></td>
+          <td>Độc quyền nền tảng + Độc quyền dữ liệu toàn cầu</td>
+          <td>Độc quyền messaging nội địa + Hệ sinh thái mini-app</td>
+        </tr>
+        <tr>
+          <td><strong>Nguồn lợi nhuận siêu ngạch</strong></td>
+          <td>Quảng cáo nhắm mục tiêu (targeted ads), dữ liệu người dùng</td>
+          <td>Quảng cáo + dịch vụ giá trị gia tăng + B2B services (Zalo OA)</td>
+        </tr>
+        <tr>
+          <td><strong>Rào cản gia nhập thị trường</strong></td>
+          <td>Network effect toàn cầu + AI + Switching cost cực cao</td>
+          <td>Network effect nội địa + Tích hợp chính phủ + Ngôn ngữ VN</td>
+        </tr>
+        <tr>
+          <td><strong>Mức độ tập trung tư bản</strong></td>
+          <td>Vốn hóa >$1,000 tỷ mỗi công ty (2024)</td>
+          <td>VNG doanh thu 10.894 tỷ VND (2025), lợi nhuận dương 856 tỷ</td>
+        </tr>
+        <tr>
+          <td><strong>Xuất khẩu tư bản</strong></td>
+          <td>Thu lợi nhuận toàn cầu, hồi hương về Mỹ</td>
+          <td>Chủ yếu thị trường nội địa; đang thử nghiệm mở rộng Myanmar</td>
+        </tr>
+        <tr>
+          <td><strong>Vai trò nhà nước</strong></td>
+          <td>Bị điều tra độc quyền tại EU, Mỹ; phạt hàng tỷ USD</td>
+          <td>Được chính phủ VN hỗ trợ (giao thức nhà nước, 40M+ followers OA)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-gold reveal">
+      <strong>💡 Câu hỏi tranh luận trung tâm: Super-app có tạo độc quyền không?</strong>
+      <strong>Góc nhìn ủng hộ:</strong> Với 80% thâm nhập, chi phí chuyển đổi cực cao ("ai cũng dùng Zalo"), và tích hợp cả chính phủ – Zalo đang xây dựng một <em>Consortium kỹ thuật số</em> đặc thù VN. <strong>Góc nhìn phản bác:</strong> Thu nhập người dùng VN vẫn tăng khi dùng Zalo – không có dấu hiệu "bóc lột giá cả độc quyền" rõ ràng như Big Tech Mỹ. Đây là mâu thuẫn cần phân tích sâu hơn.
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     5. PHẢN BIỆN 3C
+════════════════════════════════════════ -->
+<section id="debate">
+  <div class="wrap">
+    <div class="sec-header reveal">
+      <div class="sec-num">06</div>
+      <div>
+        <span class="eyebrow">06 · Phân tích đa chiều · Mâu thuẫn lý luận</span>
+        <h2>Phản Biện & Bảo Vệ<br>Luận Điểm</h2>
+      </div>
+    </div>
+
+    <p class="lead reveal">
+      Phân tích đa chiều theo cấu trúc 3C – nhóm tự đặt câu hỏi và trả lời trước để tăng sức thuyết phục của luận điểm.
+    </p>
+
+    <div class="debate-grid reveal">
+      <div class="debate-card debate-pro">
+        <h3>✅ Big Tech = Độc quyền TBCN Thế kỷ 21</h3>
+        <ul>
+          <li>Google nắm 95.59% tìm kiếm VN – vượt xa bất kỳ định nghĩa nào về "thị trường cạnh tranh"</li>
+          <li>Lợi nhuận siêu ngạch (biên ~24–29%) = minh chứng rõ ràng về giá trị thặng dư được chiếm đoạt</li>
+          <li>M&A liên tục (YouTube, Instagram, WhatsApp) = tích tụ tập trung tư bản theo đúng lý luận Lênin</li>
+          <li>Dữ liệu người dùng VN chuyển ra nước ngoài = hình thức xuất khẩu tư bản kỹ thuật số mới</li>
+          <li>EU phạt Google €8.25 tỷ (2017–2023) về hành vi độc quyền = thực tiễn xác nhận lý luận</li>
+        </ul>
+      </div>
+      <div class="debate-card debate-con">
+        <h3>❓ Mâu thuẫn & Điểm chưa rõ</h3>
+        <ul>
+          <li>Thu nhập Grab driver/Zalo seller tăng → mâu thuẫn với luận điểm "bóc lột gia tăng"?</li>
+          <li>Người dùng VN dùng Zalo "miễn phí" và hài lòng → có thực sự bị bóc lột không?</li>
+          <li>TikTok nổi lên nhanh chóng → thị trường vẫn có cạnh tranh, không phải độc quyền tuyệt đối</li>
+          <li>Lợi nhuận VNG mới chớm dương (856 tỷ năm 2025) → Zalo chưa đạt mức lợi nhuận siêu ngạch "khổng lồ" như Big Tech Mỹ</li>
+          <li>Cạnh tranh Big Tech vs nhau (Google Workspace vs Microsoft 365) → độc quyền chỉ theo phân khúc</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Response to contradictions -->
+    <h3 class="reveal" style="margin-top:2rem;margin-bottom:1rem">Nhóm MIBR trả lời các mâu thuẫn:</h3>
+
+    <div class="callout callout-blue reveal">
+      <strong>Mâu thuẫn 1: "Thu nhập Grab driver tăng mâu thuẫn với bóc lột gia tăng"</strong>
+      Giá trị tuyệt đối tăng không mâu thuẫn với bóc lột: Lênin không nói công nhân ngày càng nghèo đi về tuyệt đối, mà là phần <strong>giá trị thặng dư</strong> tư bản chiếm được tăng nhanh hơn tiền công. Grab driver thu nhập tăng 20% nhưng Grab lấy 28–35% hoa hồng trên mỗi cuốc xe và lợi nhuận toàn cầu tăng nhiều lần – đây chính xác là tái phân phối giá trị thặng dư có lợi cho tư bản.
+    </div>
+
+    <div class="callout callout-blue reveal">
+      <strong>Mâu thuẫn 2: "Dùng Zalo miễn phí → không bị bóc lột"</strong>
+      Đây là ảo tưởng "hàng hoá miễn phí" của thị trường số. Mác đã chỉ ra lao động tạo ra giá trị, không phải tiền bạc. Người dùng "trả" bằng <strong>dữ liệu hành vi</strong> – dữ liệu được Zalo/Meta tư bản hoá thành quảng cáo. Đây là hình thức giá trị thặng dư tuyệt đối (absolute surplus value) của kỷ nguyên số: thời gian chú ý (attention) bị chiếm đoạt, không phải giờ lao động thể chất.
+    </div>
+
+    <div class="callout callout-blue reveal">
+      <strong>Mâu thuẫn 3: "TikTok nổi lên → không phải độc quyền tuyệt đối"</strong>
+      Đặc điểm độc quyền TBCN theo Lênin không đòi hỏi <em>một</em> công ty duy nhất thống trị tất cả. Oligopoly (độc quyền nhóm) cũng là hình thức độc quyền: Google + Meta + TikTok + Zalo cùng nhau kiểm soát &gt;90% thời gian online của người VN. Họ cạnh tranh trong khuôn khổ nhưng cùng duy trì rào cản ngăn đối thủ mới nhỏ.
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     6. QUIZ
+════════════════════════════════════════ -->
+<section id="quiz-section">
+  <div class="wrap">
+    <div class="sec-header dark reveal">
+      <div class="sec-num" style="color:rgba(255,255,255,.18)">07</div>
+      <div>
+        <span class="eyebrow" style="color:var(--accent)">07 · Tương tác · Kiểm tra kiến thức</span>
+        <h2 style="color:#fff">Bạn Hiểu Đến Đâu?</h2>
+      </div>
+    </div>
+    <div class="quiz-box reveal" id="quiz-container">
+      <!-- JS renders quiz here -->
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     7. KẾT LUẬN
+════════════════════════════════════════ -->
+<section id="conclusion">
+  <div class="wrap">
+    <div class="sec-header dark reveal">
+      <div class="sec-num" style="color:rgba(255,255,255,.18)">08</div>
+      <div>
+        <span class="eyebrow" style="color:var(--accent)">08 · Tổng kết · Quan điểm nhóm</span>
+        <h2 style="color:#fff">Kết Luận & Hướng<br>Tư Duy Tiếp Theo</h2>
+      </div>
+    </div>
+
+    <div class="concl-grid reveal">
+      <div>
+        <p style="color:#b0c4d8;font-size:.95rem;margin-bottom:1rem">Nhóm MIBR kết luận:</p>
+        <div class="concl-thesis">
+          Big Tech không phải là phủ nhận lý luận Mác-Lênin về độc quyền — mà là <strong>xác nhận và nâng cấp</strong> nó lên tầm kỹ thuật số. Tư bản tài chính kỹ thuật số, xuất khẩu dữ liệu, lợi nhuận siêu ngạch từ attention economy — tất cả đều nằm trong khung phân tích Lênin đã đặt ra từ thế kỷ 20.
+        </div>
+        <p style="color:#b0c4d8;font-size:.9rem;line-height:1.7">
+          Riêng với Việt Nam, Zalo là hiện tượng phản-độc quyền nước ngoài thành công, nhưng đồng thời đang hình thành độc quyền nội địa. Nhà nước VN đứng trước lựa chọn: bảo vệ Zalo như "tư bản quốc gia" hay điều tiết để thị trường cạnh tranh lành mạnh hơn.
+        </p>
+      </div>
+      <div>
+        <h3 style="color:#7a9abf;margin-bottom:1rem;font-size:.85rem;font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase">Câu hỏi mở cho thảo luận</h3>
+        <div class="future-list">
+          <div class="future-item">
+            <div class="future-icon">🌐</div>
+            <p>Khi dữ liệu người dùng VN trở thành "tư liệu sản xuất" của Meta/Google, Việt Nam có cần luật bảo vệ dữ liệu mạnh hơn không?</p>
+          </div>
+          <div class="future-item">
+            <div class="future-icon">⚖️</div>
+            <p>Liệu Cục Cạnh tranh VN (VCCA) có đủ năng lực điều tiết độc quyền kỹ thuật số xuyên quốc gia không?</p>
+          </div>
+          <div class="future-item">
+            <div class="future-icon">🤖</div>
+            <p>AI tạo sinh (ChatGPT, Gemini) có tạo ra vòng độc quyền tư bản kỹ thuật số mới vượt cả 5 đặc điểm Lênin không?</p>
+          </div>
+          <div class="future-item">
+            <div class="future-icon">🇻🇳</div>
+            <p>Zalo với 20M users AI features – Việt Nam có thể trở thành nước xuất khẩu tư bản kỹ thuật số không?</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     8. NGUỒN
+════════════════════════════════════════ -->
+<section id="sources" style="background:var(--paper2)">
+  <div class="wrap">
+    <div class="sec-header reveal">
+      <div class="sec-num">09</div>
+      <div>
+        <span class="eyebrow">09 · Liêm chính học thuật</span>
+        <h2>Nguồn Tham Khảo</h2>
+      </div>
+    </div>
+
+    <div class="source-box reveal">
+      <h3>Lý luận & Giáo trình</h3>
+      <ul class="source-list">
+        <li>Bộ Giáo dục và Đào tạo (2019). <a href="https://drive.google.com/file/d/1kD4-FWb8MXoen6B_DhxJTahx38bnqibN/view?usp=sharing" target="_blank"><em>Giáo trình Kinh tế Chính trị Mác-Lênin.</em></a> NXB Chính trị Quốc gia Sự thật. Tr.149–168 (Chương 4).</li>
+        <li>Lênin, V.I. (1917). <a href="https://archive.org/details/chu-nghia-de-quoc-giai-doan-tot-cung-cua-chu-nghia-tu-ban" target="_blank"><em>Chủ nghĩa Đế quốc – Giai đoạn Tột cùng của Chủ nghĩa Tư bản.</em></a> (Bản dịch tiếng Việt).</li>
+      </ul>
+    </div>
+
+    <div class="source-box reveal" style="margin-top:1rem">
+      <h3>Số liệu Việt Nam & Khu vực</h3>
+      <ul class="source-list">
+        <li>DataReportal / We Are Social / Meltwater (Feb 2024). <a href="https://datareportal.com/reports/digital-2024-vietnam" target="_blank"><em>Digital 2024: Vietnam.</em></a></li>
+        <li>DataReportal / We Are Social / Meltwater (Jan 2025). <a href="https://datareportal.com/reports/digital-2025-vietnam" target="_blank"><em>Digital 2025: Vietnam.</em></a> (Facebook reach +3.5M users YoY)</li>
+        <li>Decision Lab (Q4 2024). <a href="https://www.decisionlab.co/blog/the-connected-consumer-q4-2024-blog" target="_blank"><em>The Connected Consumer Q4 2024.</em></a></li>
+        <li>VNG Corporation (2024). <a href="https://ir.vng.com.vn/" target="_blank"><em>Báo cáo tài chính hợp nhất 2024.</em></a></li>
+        <li>Tuoi Tre News (Dec 2025). <a href="https://news.tuoitre.vn/vietnams-80-million-user-messaging-giant-zalo-puts-spotlight-on-parent-vngs-business-103251229150347905.html" target="_blank">"Vietnam's 80 million-user messaging giant Zalo."</a></li>
+        <li>Vietnamnet (Aug 2025). <a href="https://vietnamnet.vn/en/zalo-s-number-of-users-hits-78-3-million-putting-telcos-at-pipeline-trap-2436470.html" target="_blank">"Zalo's number of users hits 78.3 million."</a></li>
+        <li>Vietnam.vn (Apr 2025). <a href="https://www.vietnam.vn/zalo-la-nen-tang-nhan-tin-duoc-yeu-thich-nhat-viet-nam-trong-nam-2024" target="_blank">"Zalo used by 85% of Vietnamese, surpassing global apps."</a></li>
+      </ul>
+    </div>
+
+    <div class="source-box reveal" style="margin-top:1rem">
+      <h3>Số liệu Big Tech & Thị phần</h3>
+      <ul class="source-list">
+        <li>StatCounter GlobalStats (2024). <a href="https://gs.statcounter.com/search-engine-market-share/all/viet-nam" target="_blank"><em>Search Engine Market Share – Viet Nam.</em></a></li>
+        <li>Knok Studios (Dec 2023). <a href="https://knok-studios.com/en/search-engines-in-vietnam-market-overview/" target="_blank">"Search Engines in Vietnam: Market Overview."</a></li>
+        <li>Statista / StatCounter (Mar 2025). <a href="https://www.statista.com/statistics/954433/vietnam-market-share-of-search-engines/" target="_blank">"Market Share of Search Engines across Vietnam in 2024."</a></li>
+        <li>Alphabet Inc. (2024). <a href="https://abc.xyz/investor/" target="_blank"><em>Annual Report 2023.</em></a></li>
+        <li>Meta Platforms Inc. (2024). <a href="https://investor.fb.com/" target="_blank"><em>Annual Report 2023.</em></a></li>
+        <li>DigitalInAsia (May 2026). <a href="https://digitalinasia.com/vietnam-digital-market-overview-2026/" target="_blank">"State of Vietnam's Digital Economy in 2026."</a></li>
+        <li>Vietnam Law Magazine (Nov 2025). <a href="https://vietnamlawmagazine.vn/development-of-e-commerce-in-vietnam-in-the-digital-era-75800.html" target="_blank">"Development of e-commerce in Vietnam."</a></li>
+      </ul>
+    </div>
+
+    <div class="callout callout-gold reveal" style="margin-top:1.5rem">
+      <strong>📌 Lưu ý về kiểm chứng số liệu:</strong>
+      Tất cả số liệu trong sản phẩm này đã được xác minh với nguồn gốc chính thức. Số liệu thị phần tìm kiếm từ StatCounter (cơ sở hạ tầng hơn 5 tỷ page views/tháng). Số liệu Zalo từ báo cáo tài chính chính thức của VNG. Số liệu Facebook/Meta từ Meta's advertising tools, dẫn lại bởi DataReportal. Chi tiết kiểm chứng xem Phụ lục AI đính kèm.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>NHÓM MIBR · KTCT MÁC-LÊNIN · CHỦ ĐỀ 6: ĐỘC QUYỀN BIG TECH</span><br>
+  <span style="color:#333">Chương 4 (chính) + Chương 2 (phụ) · 2025–2026</span>
+</footer>
+
+<!-- ════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════ -->
+<script>
+// ── SCROLL REVEAL ──────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      // Animate bars when section enters
+      e.target.querySelectorAll('.stat-bar').forEach(b => {
+        setTimeout(()=>{ b.style.width = b.dataset.width; }, 100);
+      });
+    }
+  });
+}, {threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Also animate bars when already visible
+document.querySelectorAll('.stat-bar').forEach(b => {
+  const io = new IntersectionObserver(entries => {
+    if(entries[0].isIntersecting) b.style.width = b.dataset.width;
+  }, {threshold:.5});
+  io.observe(b);
+});
+
+// ── STICKY NAV ACTIVE ──────────────────────────
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-inner a');
+const navObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navLinks.forEach(a=>a.classList.remove('active'));
+      const active = document.querySelector(`.nav-inner a[href="#${e.target.id}"]`);
+      if(active) active.classList.add('active');
+    }
+  });
+},{threshold:.35});
+sections.forEach(s=>navObs.observe(s));
+
+// ── QUIZ ───────────────────────────────────────
+const questions = [
+  {
+    q:"Theo lý luận Mác-Lênin, 'lợi nhuận siêu ngạch' là gì?",
+    opts:[
+      "Lợi nhuận thu được từ xuất khẩu hàng hoá truyền thống",
+      "Lợi nhuận cao hơn lợi nhuận bình quân xã hội nhờ độc chiếm thị trường",
+      "Lợi nhuận của nhà nước từ doanh nghiệp quốc doanh",
+      "Thu nhập của người lao động trong nền kinh tế thị trường"
+    ],
+    correct:1,
+    explain:"Lợi nhuận siêu ngạch = lợi nhuận cao hơn mức bình quân xã hội mà tư bản độc quyền thu được nhờ độc chiếm thị trường và áp đặt giá độc quyền. Đây là động lực cốt lõi của Big Tech khi duy trì vị thế thống trị."
+  },
+  {
+    q:"Zalo có bao nhiêu người dùng hoạt động hàng tháng (MAU) tính đến giữa năm 2025?",
+    opts:["~50 triệu","~65 triệu","~78.3 triệu","~90 triệu"],
+    correct:2,
+    explain:"Theo cập nhật năm 2025, Zalo đạt 78.3 triệu MAU với gần 2 tỷ tin nhắn gửi mỗi ngày, tiếp tục thống trị mảng nhắn tin nội địa."
+  },
+  {
+    q:"Google chiếm bao nhiêu % thị phần công cụ tìm kiếm tại Việt Nam (tính đến tháng 6/2026)?",
+    opts:["~75%","~85%","~92%","~95.59%"],
+    correct:3,
+    explain:"Google chiếm 95.59% thị phần tìm kiếm tại VN (cập nhật 2026). Cốc Cốc – đối thủ lớn thứ 2 – chỉ giữ 3.62%."
+  },
+  {
+    q:"Đặc điểm nào KHÔNG phải trong 5 đặc điểm kinh tế của Chủ nghĩa Tư bản Độc quyền theo Lênin?",
+    opts:[
+      "Tập trung sản xuất và các tổ chức độc quyền",
+      "Tư bản tài chính và đầu sỏ tài chính",
+      "Tư hữu hóa tư liệu sản xuất quốc gia",
+      "Xuất khẩu tư bản"
+    ],
+    correct:2,
+    explain:"Lênin chỉ ra 5 đặc điểm: (1) Tập trung sản xuất, (2) Tư bản tài chính & đầu sỏ, (3) Xuất khẩu tư bản, (4) Phân chia thế giới về kinh tế, (5) Phân chia thế giới về lãnh thổ. 'Tư hữu hóa tư liệu sản xuất quốc gia' không phải đặc điểm này."
+  },
+  {
+    q:"Mức độ thâm nhập của Zalo trong ứng dụng mạng xã hội tại VN (năm 2025) là bao nhiêu?",
+    opts:["~55%","~65%","~85%","~95%"],
+    correct:2,
+    explain:"Theo cập nhật năm 2025, Zalo dẫn đầu với 85% penetration rate, vượt trên nền tảng mạng xã hội mở như Facebook (75.2%)."
+  },
+  {
+    q:"Theo phân tích KTCT, khi người dùng VN dùng Facebook 'miễn phí', họ thực chất đang:",
+    opts:[
+      "Nhận trợ cấp từ chính phủ Mỹ",
+      "Trao đổi dữ liệu hành vi – hình thức giá trị thặng dư trong kinh tế số",
+      "Hưởng lợi từ cạnh tranh thị trường không giới hạn",
+      "Tham gia mô hình kinh tế phi lợi nhuận"
+    ],
+    correct:1,
+    explain:"'Miễn phí' chỉ là bề ngoài. Người dùng trả bằng dữ liệu hành vi – được Meta tư bản hoá thành targeted ads. Đây là hình thức chiếm đoạt 'attention value' – giá trị thặng dư kỹ thuật số theo lý luận KTCT Mác-Lênin."
+  },
+  {
+    q:"VNG (công ty mẹ của Zalo) có tình hình tài chính như thế nào năm 2025?",
+    opts:[
+      "Đạt doanh thu >10.8 nghìn tỷ VND, ghi nhận lợi nhuận dương 856 tỷ",
+      "Hoà vốn, không lãi không lỗ",
+      "Vẫn tiếp tục lỗ ròng do chi phí lớn",
+      "Phá sản và tái cơ cấu"
+    ],
+    correct:0,
+    explain:"Trong năm 2025, VNG đạt doanh thu thuần 10.894 tỷ đồng và lợi nhuận kinh doanh dương 856 tỷ đồng (tăng 183% YoY), chuyển từ lỗ sang lãi nhờ tư bản hóa nền tảng."
+  }
+];
+
+let current = 0, score = 0, answered = false;
+
+function renderQuiz(){
+  const box = document.getElementById('quiz-container');
+  if(current >= questions.length){
+    const pct = Math.round(score/questions.length*100);
+    let msg = pct>=85 ? '🎉 Xuất sắc! Bạn hiểu rất sâu lý luận KTCT & số liệu thực tiễn.'
+            : pct>=57 ? '👍 Tốt! Ôn lại các phần chưa nắm để hoàn thiện hơn.'
+            : '📚 Cần ôn thêm. Đọc lại phần Lý luận và Số liệu bên trên nhé!';
+    box.innerHTML = `
+      <div class="quiz-score">${score}/${questions.length}</div>
+      <div class="quiz-result-msg">${pct}% đúng<br>${msg}</div>
+      <button class="quiz-nav button quiz-restart" onclick="resetQuiz()" style="background:var(--accent);color:#fff;border:none;padding:.8rem 2rem;border-radius:3px;cursor:pointer;font-family:var(--mono);font-size:.9rem;margin-top:1.5rem">
+        Làm lại từ đầu
+      </button>`;
+    return;
+  }
+  const q = questions[current];
+  box.innerHTML = `
+    <div class="quiz-q">
+      <span>Câu ${current+1} / ${questions.length}</span>
+      ${q.q}
+    </div>
+    <div class="quiz-opts">
+      ${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answer(${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}
+    </div>
+    <div class="quiz-feedback" id="qfb"></div>
+    <div class="quiz-nav">
+      <span class="quiz-progress">Điểm: ${score} đúng</span>
+      <button id="next-btn" onclick="next()" disabled>Tiếp →</button>
+    </div>`;
+  answered = false;
+}
+
+function answer(idx){
+  if(answered) return;
+  answered = true;
+  const q = questions[current];
+  const opts = document.querySelectorAll('.quiz-opt');
+  opts.forEach((o,i)=>{
+    o.disabled = true;
+    if(i===q.correct) o.classList.add('correct');
+    else if(i===idx && idx!==q.correct) o.classList.add('wrong');
+  });
+  if(idx===q.correct) score++;
+  document.getElementById('qfb').textContent = (idx===q.correct ? '✓ Đúng! ' : '✗ Chưa đúng. ') + q.explain;
+  document.getElementById('next-btn').disabled = false;
+}
+
+function next(){ current++; renderQuiz(); }
+function resetQuiz(){ current=0; score=0; renderQuiz(); }
+
+renderQuiz();
+</script>
+</body>
+</html>
